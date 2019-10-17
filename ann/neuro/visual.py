@@ -1,7 +1,7 @@
 # coding:utf-8
 # Created by Equator at 2019/10/5
 import matplotlib.pyplot as plot
-import ann.neuro.sgn as sgn
+import ann.neuro.excitation_function as sgn
 
 
 if __name__ == '__main__':

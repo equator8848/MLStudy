@@ -1,7 +1,7 @@
 # coding:utf-8
 # Created by Equator at 2019/10/5
 import numpy as np
-import ann.neuro.sgn as sgn
+import ann.neuro.excitation_function as sf
 
 # 统一阈值模型
 if __name__ == '__main__':
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     inout_x = [-1, 2, 4, 6, 8]
     X = np.mat(inout_x)
     net = np.matmul(W, X.T)
-    o = sgn.factory('a', net)
+    o = sf.factory('a', net)
     print(o)
 
 

@@ -2,22 +2,24 @@
 # Created by Equator at 2019/10/5
 import math
 
+# excitation function 激励函数
 
-def sng_a(net):
+
+def ef_a(net):
     if net >= 0:
         return 1
     else:
         return 0
 
 
-def sng_b(net):
+def ef_b(net):
     if net >= 0:
         return 1
     else:
         return -1
 
 
-def sng_c(net):
+def ef_c(net):
     if net <= 0:
         return 0
     elif net <= 1:
@@ -26,7 +28,7 @@ def sng_c(net):
         return 1
 
 
-def sng_d(net):
+def ef_d(net):
     if net <= -1:
         return -1
     elif net <= 1:
@@ -36,7 +38,7 @@ def sng_d(net):
 
 
 # Relu
-def sng_e(net):
+def ef_e(net):
     if net < 0:
         return 0
     else:
@@ -44,29 +46,29 @@ def sng_e(net):
 
 
 # Simoid
-def sng_f(net):
+def ef_f(net):
     return 1/(1+math.pow(math.e, -net))
 
 
 # 双曲正弦
-def sng_g(net):
+def ef_g(net):
     return (math.pow(math.e, net) - math.pow(math.e, -net))/(math.pow(math.e, net) + math.pow(math.e, -net))
 
 
 def factory(flag, net):
     if flag == 'a':
-        return sng_a(net)
+        return ef_a(net)
     elif flag == 'b':
-        return sng_b(net)
+        return ef_b(net)
     elif flag == 'c':
-        return sng_c(net)
+        return ef_c(net)
     elif flag == 'd':
-        return sng_d(net)
+        return ef_d(net)
     elif flag == 'e':
-        return sng_e(net)
+        return ef_e(net)
     elif flag == 'f':
-        return sng_f(net)
+        return ef_f(net)
     elif flag == 'g':
-        return sng_g(net)
+        return ef_g(net)
     else:
         return None
