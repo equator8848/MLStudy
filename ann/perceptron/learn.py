@@ -41,7 +41,7 @@ def get_data_from_file():
             for dig in row:
                 row_list.append(int(dig))
             result.append(row_list)
-        print(result)
+        print("数据集："+str(result))
         return result
 
 
@@ -50,7 +50,6 @@ def judge(w, dimension, input_rows):
     for row in input_rows:
         result = sir(w, row[0:dimension])
         if result != row[dimension]:
-            print(row)
             print('预期输出：' + str(row[dimension]) + '    实际输出：' + str(result))
             return False
     return True
@@ -79,12 +78,7 @@ def learn():
     counter = 0
     # 权值向量
     w_list = []
-    w0 = []
-    i = 0
-    # while i <= dimension:
-    #     w0.append(get_random_number())
-    #     i = i + 1
-    w_list.append([0.4, 1, 1, 1])
+    w_list.append([0.4, 0.1, 0.1, 0.1])
     while not judge(w_list[counter], dimension, input_rows):
         for row in input_rows:
             # print(row)
@@ -92,8 +86,10 @@ def learn():
             # print(w_list[counter])
             temp_result = sir(w_list[counter], row[0:dimension])
             w_temp = []
-            for i in range(dimension + 1):
-                w_temp.append(w_list[counter][i] + step * (row[dimension] - temp_result) * row[i])
+            for i in range(dimension):
+                if i == 0:
+                    w_temp.append(w_list[counter][i])
+                w_temp.append(w_list[counter][i+1] + step * (row[dimension] - temp_result) * row[i+1])
             print(w_temp)
             w_list.append(w_temp)
             counter = counter + 1
