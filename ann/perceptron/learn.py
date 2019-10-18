@@ -73,7 +73,7 @@ def learn():
     # 数据输入
     input_rows = get_data_from_file()
     # 学习步长
-    step = 0.0001
+    step = 0.02
     # 调整次数
     counter = 0
     # 权值向量
@@ -86,10 +86,8 @@ def learn():
             # print(w_list[counter])
             temp_result = sir(w_list[counter], row[0:dimension])
             w_temp = []
-            for i in range(dimension):
-                if i == 0:
-                    w_temp.append(w_list[counter][i])
-                w_temp.append(w_list[counter][i+1] + step * (row[dimension] - temp_result) * row[i+1])
+            for i in range(dimension+1):
+                w_temp.append(w_list[counter][i] + step * (row[dimension] - temp_result) * row[i])
             print(w_temp)
             w_list.append(w_temp)
             counter = counter + 1
