@@ -9,7 +9,7 @@ def calculate(input_matrix):
     for data in input_matrix:
         result = sf.factory('f', data)
         results.append(result)
-    return np.asarray(results)
+    return np.asarray(results).reshape(input_matrix.size,1)
 
 
 

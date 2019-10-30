@@ -4,6 +4,8 @@ import tensorflow as tf
 import random
 import numpy as np
 from ann.mnist.Layer import Layer
+import LoggerConfiguration
+import logging
 
 # 加载并准备MNIST数据集，将样本从整数转换为浮点数
 mnist = tf.keras.datasets.mnist
@@ -22,7 +24,7 @@ def get_train_batch(size):
 def get_test_batch(size):
     data_size = len(x_test)
     for i in range(size):
-        index = random.randint(0, data_size)
+        index = random.randint(0, data_size) - 1
         yield x_test[index], y_test[index]
 
 
@@ -44,7 +46,7 @@ def find_max(output_size, output):
 
 
 def bp():
-    learn_rate = 0.01
+    learn_rate = 0.02
     # 输入层神经元数量（28*28=784）
     input_layer_size = 784
     # 隐层神经元数量
@@ -52,10 +54,10 @@ def bp():
     # 输出层神经元数量
     output_layer_size = 10
     # 每批数据数据量
-    mini_batch_size = 10000
+    mini_batch_size = 100
 
-    # 测试数目
-    train_size = 100
+    # 训练数目
+    train_size = 10
     train_counter = 0
     # 建立隐层
     hide_layer_list = [Layer(input_layer_size, hide_layer_size), Layer(hide_layer_size, hide_layer_size)]
@@ -77,18 +79,18 @@ def bp():
                     hide_layer_list[i].calculate(input_layer)
                 else:
                     hide_layer_list[i].calculate(hide_layer_list[i - 1].result)
+                logging.debug("第%d层隐层输出 %s" % (i, hide_layer_list[i].result.T))
             output_layer.calculate(hide_layer_list[-1].result)
-
+            logging.debug("输出层结果 %s" % output_layer.result.T)
             # 反向传播
             output_layer.output_layer_feedback(learn_rate, get_desired_output(output_layer_size, y_train_row),
                                                hide_layer_list[-1].result)
-            # 方向遍历隐含层
+            # 反向遍历隐含层
             for i in range(len(hide_layer_list) - 1, -1, -1):
-                # print("i=%d" % i)
                 # 倒数第一层
                 if i == len(hide_layer_list) - 1:
                     hide_layer_list[i].hide_layer_feedback(learn_rate, hide_layer_list[i - 1].result,
-                                                           output_layer.local_grad, output_layer.weight)
+                                                           output_layer.local_grad, output_layer.weight, )
                 # 第一层
                 elif i == 0:
                     hide_layer_list[i].hide_layer_feedback(learn_rate, input_layer, hide_layer_list[i + 1].local_grad,
@@ -99,8 +101,8 @@ def bp():
                                                            hide_layer_list[i + 1].local_grad,
                                                            hide_layer_list[i + 1].weight)
         train_counter = train_counter + 1
-        print("第%d次训练" % train_counter)
-    print("训练结束")
+        logging.info("第%d次训练" % train_counter)
+    logging.info("训练结束")
 
     test_size = 1000
     test_correct_counter = 0
@@ -122,8 +124,7 @@ def bp():
         result = find_max(output_layer_size, output_layer.result)
         if result == y_test_row:
             test_correct_counter = test_correct_counter + 1
-
-    print("正确率：%f" % (test_correct_counter / test_size))
+    logging.info("正确率：%f" % (test_correct_counter / test_size))
 
 
 if __name__ == '__main__':

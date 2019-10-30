@@ -5,7 +5,7 @@ import ann.neuro.excitation_function as sgn
 
 
 if __name__ == '__main__':
-    flag = 'g'
+    flag = 'f'
     x = []
     y = []
     left = -10

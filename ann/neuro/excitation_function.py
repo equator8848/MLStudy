@@ -1,6 +1,8 @@
 # coding:utf-8
 # Created by Equator at 2019/10/5
 import math
+import numpy as np
+
 
 # excitation function 激励函数
 
@@ -47,12 +49,12 @@ def ef_e(net):
 
 # Simoid
 def ef_f(net):
-    return 1/(1+math.pow(math.e, -net))
+    return 1. / (1 + np.exp(-net))
 
 
 # 双曲正弦
 def ef_g(net):
-    return (math.pow(math.e, net) - math.pow(math.e, -net))/(math.pow(math.e, net) + math.pow(math.e, -net))
+    return (math.pow(math.e, net) - math.pow(math.e, -net)) / (math.pow(math.e, net) + math.pow(math.e, -net))
 
 
 def factory(flag, net):
