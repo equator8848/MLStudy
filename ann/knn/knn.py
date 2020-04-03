@@ -37,25 +37,28 @@ def init_data():
 
 def visual(points):
     color = ['red', 'blue', 'green']
-    plt.figure()
+    marker = ['*', '+', '^']
 
+    plt.figure()
+    plt.title('* is class 1, + is class 2, ^ is class 3')
     for inx, sub_points_set in enumerate(points):
         x = [point[0] for point in sub_points_set]
         y = [point[1] for point in sub_points_set]
-        plt.scatter(x, y, c=color[inx])
-
+        plt.scatter(x, y, c=color[inx], marker=marker[inx])
     plt.show()
 
 
 def visual_with_unknown_point(points, unknown_point):
-    color = ['yellow', 'blue', 'green']
-    plt.figure()
+    color = ['purple', 'blue', 'green']
+    marker = ['*', '+', '^']
 
+    plt.figure()
+    plt.title('* is class 1, + is class 2, ^ is class 3')
     for inx, sub_points_set in enumerate(points):
         x = [point[0] for point in sub_points_set]
         y = [point[1] for point in sub_points_set]
-        plt.scatter(x, y, c=color[inx])
-    plt.scatter(unknown_point[0], unknown_point[1], c='red')
+        plt.scatter(x, y, c=color[inx], marker=marker[inx])
+    plt.scatter(unknown_point[0], unknown_point[1], c='red', label='unknown')
     plt.show()
 
 
@@ -106,7 +109,7 @@ def vote(distance_label_list):
 
 if __name__ == '__main__':
     points = init_data()
-    # visual(points)
+    visual(points)
     unknown_point = (random.randint(0, 20), random.randint(0, 20))
     distance_label_list = []
     for point in list_translate(points):

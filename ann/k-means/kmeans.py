@@ -4,7 +4,7 @@ import random
 import math
 from matplotlib import pyplot as plt
 
-k = 3
+k = 2
 area_num = 2
 area_size = 15
 
@@ -44,10 +44,10 @@ def visual_with_center_point(points, center_point_set, cluster_center_set):
     for inx, val in enumerate(cluster_center_set):
         x = [point[0] for point in val]
         y = [point[1] for point in val]
-        plt.scatter(x, y, c=color[inx])
+        plt.scatter(x, y, c=color[inx], marker=marker[inx])
 
     for inx, val in enumerate(center_point_set):
-        plt.scatter(val[0], val[1], c=color[inx], marker=marker[inx])
+        plt.scatter(val[0], val[1], c=color[inx], marker=marker[inx], s=200)
     plt.show()
 
 
@@ -153,4 +153,5 @@ if __name__ == '__main__':
         criterion_function_result_temp = criterion_function(cluster_center, cluster_center_set)
         step = step + 1
         visual_with_center_point(points, cluster_center, cluster_center_set)
+    print("结束")
     visual_with_center_point(points, cluster_center, cluster_center_set)
