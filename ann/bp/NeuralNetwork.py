@@ -61,8 +61,3 @@ class NeuralNetwork:
             inputs = temp_outputs
         # 判断输出层最接近1的那个神经元的下标是否与标签中为1（一组标签只有一个1）的那个下标一致
         return list(inputs).index(max(list(inputs))) == list(test_y).index(1)
-
-
-if __name__ == '__main__':
-    li = [1, 6, 5, 78, 7, 9, 6, 4, 5]
-    print(li.index(6))

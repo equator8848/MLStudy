@@ -10,7 +10,7 @@ import logging
 # 加载并准备MNIST数据集，将样本从整数转换为浮点数
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train, x_test = x_train / 255.0, x_test / 255.0
+x_train, x_test = x_train / 2550.0, x_test / 2550.0
 
 
 # 随机获取指定数量的训练数据
@@ -57,7 +57,7 @@ def bp():
     mini_batch_size = 100
 
     # 训练数目
-    train_size = 10
+    train_size = 100
     train_counter = 0
     # 建立隐层
     hide_layer_list = [Layer(input_layer_size, hide_layer_size), Layer(hide_layer_size, hide_layer_size)]
