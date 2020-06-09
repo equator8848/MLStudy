@@ -46,6 +46,7 @@ class NeuralNetwork:
             else:
                 # 隐层的误差=当前隐层与下一层之间的权值矩阵与下一层误差矩阵的乘积
                 self.output_errors.append(np.dot((self.weight[self.layer_num - i]).T, self.output_errors[i - 1]))
+        # print("LOSS:", np.sum(self.output_errors[-1]))
         # 反向传播
         for i in range(self.layer_num):
             # f(x)* （1-f(x)）即为激活函数 f(x)的导函数，更新过程从后向前进行

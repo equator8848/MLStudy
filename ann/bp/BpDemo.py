@@ -2,10 +2,10 @@ from ann.bp import DataSet
 from ann.bp.NeuralNetwork import NeuralNetwork
 
 if __name__ == '__main__':
-    train_times = 5
+    train_times = 20
     learn_step = 0.1
-    layers = [784, 30, 10]
-    network = NeuralNetwork(2, learn_step, layers)
+    layers = [784, 20, 40, 30, 10]
+    network = NeuralNetwork(4, learn_step, layers)
     x_train, y_train = DataSet.load_data(True)
     print("训练环节...")
     for i in range(train_times):
